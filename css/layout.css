@@ -10,7 +10,6 @@
 
 .row {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .column-full,
@@ -31,4 +30,12 @@
   .column-half {
     width: 50%;
   }
+
+  .image-row {
+    width: 50%;
+  }
+}
+
+.width-row {
+  flex-wrap: wrap;
 }

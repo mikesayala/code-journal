@@ -13,12 +13,55 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
+
 </head>
 <body>
-  <header>
+  <header class="header">
+    <div class="container header-container">
+      <div class="row">
+        <h3 class="heading">Code Journal</h3>
+      </div>
+    </div>
   </header>
   <main>
-    <div data-view="entry-form"></div>
+    <div class="container main-container">
+      <div class="row">
+        <h2>New Entry</h2>
+      </div>
+      <form action="">
+        <div data-view="entry-form">
+           <div class="row width-row">
+              <div class="row image-row">
+                <img src="images/placeholder-image-square.jpg" alt="empty" class="imageholder">
+              </div>
+              <div class="column column-half">
+                <label for="title">
+                  <h3 class="label">Title</h3>
+                </label>
+                <div>
+                  <input type="text" id="title" class="info" name="title">
+                </div>
+                <div>
+                  <label for="url">
+                    <h3 class="label">Photo URL</h3>
+                  </label>
+                </div>
+                <div>
+                  <input type="text" id="url" class="info">
+                </div>
+              </div>
+           </div>
+            <label for="notes"><h3 class="note-label">Notes</h3></label>
+            <textarea name="notes" id="notes" cols="30" rows="10" class="textarea"></textarea>
+            <div class="row justify-end">
+              <input type="submit" value="Save" class="save">
+            </div>
+        </div>
+      </form>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
