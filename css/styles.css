@@ -4,8 +4,9 @@ body {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 40px;
   font-family: 'Proza Libre', sans-serif;
+  font-weight: 600;
 }
 
 input {
@@ -56,12 +57,20 @@ input {
 
 .save {
   margin: 10px 0;
+  font-size: 15px;
+  background-color: #552b81;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Proza Libre', sans-serif;
 }
 
 .heading {
   padding-bottom: 10px;
   font-family: 'Proza Libre', sans-serif;
   font-size: 24px;
+  font-weight: 400;
 }
 
 .textarea {
