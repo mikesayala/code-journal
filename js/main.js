@@ -39,7 +39,8 @@ function objectDOMTree(formObject) {
   $imageRow.setAttribute('class', 'row image-row');
 
   var $imgDOM = document.createElement('img');
-  $imgDOM.setAttribute('src', $entryForm.elements.url.value);
+  $imgDOM.setAttribute('src', formObject.url);
+  $imgDOM.setAttribute('class', 'imageholder');
   $imageRow.appendChild($imgDOM);
   $widthRow.appendChild($imageRow);
 
@@ -48,23 +49,23 @@ function objectDOMTree(formObject) {
 
   var $h3 = document.createElement('h3');
   $h3.setAttribute('class', 'label margin-left-20');
-  $h3.textContent = $entryForm.elements.title.value;
+  $h3.textContent = formObject.title;
   $columnHalf.appendChild($h3);
 
   var $notesP = document.createElement('p');
   $notesP.setAttribute('class', 'info photo-url padding-left-20');
-  $notesP.textContent = $entryForm.elements.notes.value;
+  $notesP.textContent = formObject.notes;
   $columnHalf.appendChild($notesP);
 
   $widthRow.appendChild($columnHalf);
-  $ul.appendChild($imageRow);
+  $ul.appendChild($widthRow);
 
   return $ul;
 }
 
 function DOMObjectLoaded(event) {
-  for (var i = 0; i < $entryForm.length; i++) {
-    $entriesView.appendChild(objectDOMTree($entryForm[i]));
+  for (var i = 0; i < data.entries.length; i++) {
+    $entriesView.appendChild(objectDOMTree(data.entries[i]));
   }
 }
 
