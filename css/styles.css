@@ -27,12 +27,6 @@ input {
   display: flex;
 }
 
-.column-full {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
 .imageholder {
   max-width: 100%;
   margin-bottom: 10px;
