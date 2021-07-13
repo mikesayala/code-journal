@@ -79,3 +79,7 @@ input {
   height: 150px;
   font-family: sans-serif;
 }
+
+.textarea:required {
+  border: 1px #552b81;
+}
