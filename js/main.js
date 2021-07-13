@@ -79,20 +79,25 @@ var $newEntry = document.querySelector('.new-entry');
 var $noEntries = document.querySelector('.noEntries');
 
 function handleEntries(event) {
-  if (data.entries === []) {
+  if (data.entries.length === 0) {
     $noEntries.classList.remove('hidden');
-  } else {
-    $entryForm.classList.toggle('hidden');
-    $entriesView.classList.remove('hidden');
-    $newEntry.classList.toggle('hidden');
-    $entriesNewButton.classList.remove('hidden');
   }
+  $entryForm.classList.toggle('hidden');
+  $entriesView.classList.remove('hidden');
+  $newEntry.classList.toggle('hidden');
+  $entriesNewButton.classList.remove('hidden');
+  $entries.classList.toggle('hidden');
 }
+
 var $newButton = document.querySelector('.new-button');
 $newButton.addEventListener('click', handleNewEntry);
 function handleNewEntry(event) {
+  if (data.entries.length === 0) {
+    $noEntries.classList.toggle('hidden');
+  }
   $entriesNewButton.classList.toggle('hidden');
   $entriesView.classList.toggle('hidden');
   $entryForm.classList.remove('hidden');
   $newEntry.classList.remove('hidden');
+  $entries.classList.remove('hidden');
 }
