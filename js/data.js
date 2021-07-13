@@ -6,14 +6,14 @@ var data = {
   editing: null,
   nextEntryId: 1
 };
-var previousEntryJSON = localStorage.getItem('data-entries');
+var previousEntryJSON = localStorage.getItem('data-storage');
 if (previousEntryJSON !== null) {
-  data.entries = JSON.parse(previousEntryJSON);
+  data = JSON.parse(previousEntryJSON);
 }
 
 window.addEventListener('beforeunload', handleUnload);
 
 function handleUnload(event) {
-  var entryJSON = JSON.stringify(data.entries);
-  localStorage.setItem('data-entries', entryJSON);
+  var entryJSON = JSON.stringify(data);
+  localStorage.setItem('data-storage', entryJSON);
 }
