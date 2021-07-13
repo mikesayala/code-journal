@@ -3,6 +3,7 @@
 var $img = document.querySelector('img');
 var $photoUrl = document.querySelector('.photo-url');
 var $entryForm = document.querySelector('.entry-form');
+var $entriesView = document.querySelector('.entries');
 $photoUrl.addEventListener('input', inputURL);
 $entryForm.addEventListener('submit', handleSubmitForm);
 function inputURL(event) {
@@ -25,7 +26,6 @@ function handleSubmitForm(event) {
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
 
-  objectDOMTree(formObject);
 }
 
 function objectDOMTree(formObject) {
@@ -61,3 +61,11 @@ function objectDOMTree(formObject) {
 
   return $ul;
 }
+
+function DOMObjectLoaded(event) {
+  for (var i = 0; i < $entryForm.length; i++) {
+    $entriesView.appendChild(objectDOMTree($entryForm[i]));
+  }
+}
+
+window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
