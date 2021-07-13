@@ -18,8 +18,9 @@ function handleSubmitForm(event) {
     title: $entryForm.elements.title.value,
     url: $entryForm.elements.url.value,
     notes: $entryForm.elements.notes.value,
-    nextEntryId: data.nextEntryId++
+    nextEntryId: data.nextEntryId
   };
+  data.nextEntryId++;
   data.entries.unshift(formObject);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
