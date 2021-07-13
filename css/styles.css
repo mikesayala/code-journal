@@ -89,3 +89,17 @@ input {
 .justify-between {
   justify-content: space-between;
 }
+
+.justify-center {
+  justify-content: center;
+}
+
+.nav-entries {
+  color: white;
+  text-decoration: none;
+}
+
+.no-entries {
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: 300;
+}

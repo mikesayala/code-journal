@@ -4,6 +4,8 @@ var $img = document.querySelector('img');
 var $photoUrl = document.querySelector('.photo-url');
 var $entryForm = document.querySelector('.entry-form');
 var $entriesView = document.querySelector('.entries');
+var $entries = document.querySelector('.nav-entries');
+var $entriesNewButton = document.querySelector('.entries-new');
 $photoUrl.addEventListener('input', inputURL);
 $entryForm.addEventListener('submit', handleSubmitForm);
 function inputURL(event) {
@@ -70,3 +72,27 @@ function DOMObjectLoaded(event) {
 }
 
 window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
+
+$entries.addEventListener('click', handleEntries);
+
+var $newEntry = document.querySelector('.new-entry');
+var $noEntries = document.querySelector('.noEntries');
+
+function handleEntries(event) {
+  if (data.entries === []) {
+    $noEntries.classList.remove('hidden');
+  } else {
+    $entryForm.classList.toggle('hidden');
+    $entriesView.classList.remove('hidden');
+    $newEntry.classList.toggle('hidden');
+    $entriesNewButton.classList.remove('hidden');
+  }
+}
+var $newButton = document.querySelector('.new-button');
+$newButton.addEventListener('click', handleNewEntry);
+function handleNewEntry(event) {
+  $entriesNewButton.classList.toggle('hidden');
+  $entriesView.classList.toggle('hidden');
+  $entryForm.classList.remove('hidden');
+  $newEntry.classList.remove('hidden');
+}

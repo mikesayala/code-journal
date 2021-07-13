@@ -22,18 +22,18 @@
     <div class="container header-container">
       <div class="row">
         <p class="heading">Code Journal</p>
-        <p class="heading hidden margin-left-30">Entries</p>
+        <a href="#" class="heading nav-entries margin-left-30">Entries</a>
       </div>
     </div>
   </header>
   <main>
     <div class="container main-container">
       <div class="row">
-        <h2>New Entry</h2>
+        <h2 class="new-entry">New Entry</h2>
       </div>
-      <div class="row info justify-between hidden">
+      <div class="row info justify-between entries-new hidden">
         <h2>Entries</h2>
-        <input type="submit" value="NEW" class="save">
+        <input type="submit" value="NEW" class="save new-button">
       </div>
       <div data-view="entry-form">
           <form action="index.html" class="entry-form">
@@ -65,7 +65,10 @@
             </div>
           </form>
         </div>
-        <div data-view="entries" class="entries"></div>
+        <div data-view="entries" class="entries hidden"></div>
+        <div class="row noEntries hidden justify-center">
+          <h4>No entries have been recorded.</h4>
+        </div>
     </div>
   </main>
   <script src="js/data.js"></script>
