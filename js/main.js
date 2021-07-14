@@ -111,7 +111,9 @@ function handleNewEntry(event) {
   data.view = 'entry-form';
 }
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', sameOnLoad);
+
+function sameOnLoad(event) {
   if (data.view === 'entries') {
     $entryForm.classList.toggle('hidden');
     $entriesView.classList.remove('hidden');
@@ -119,4 +121,4 @@ window.addEventListener('DOMContentLoaded', function () {
     $entriesNewButton.classList.remove('hidden');
     $entries.classList.toggle('hidden');
   }
-});
+}
