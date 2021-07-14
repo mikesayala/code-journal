@@ -6,8 +6,14 @@ var $entryForm = document.querySelector('.entry-form');
 var $entriesView = document.querySelector('.entries');
 var $entries = document.querySelector('.nav-entries');
 var $entriesNewButton = document.querySelector('.entries-new');
+var $newButton = document.querySelector('.new-button');
+
+$newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
 $entryForm.addEventListener('submit', handleSubmitForm);
+window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
+$entries.addEventListener('click', handleEntries);
+
 function inputURL(event) {
   if (event.target.value === '') {
     $img.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -28,6 +34,7 @@ function handleSubmitForm(event) {
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
 
+  $entriesView.prepend(objectDOMTree(formObject));
 }
 
 function objectDOMTree(formObject) {
@@ -68,12 +75,9 @@ function objectDOMTree(formObject) {
 function DOMObjectLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
     $entriesView.appendChild(objectDOMTree(data.entries[i]));
+
   }
 }
-
-window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
-
-$entries.addEventListener('click', handleEntries);
 
 var $newEntry = document.querySelector('.new-entry');
 var $noEntries = document.querySelector('.noEntries');
@@ -87,10 +91,9 @@ function handleEntries(event) {
   $newEntry.classList.toggle('hidden');
   $entriesNewButton.classList.remove('hidden');
   $entries.classList.toggle('hidden');
+  data.view = 'entries';
 }
 
-var $newButton = document.querySelector('.new-button');
-$newButton.addEventListener('click', handleNewEntry);
 function handleNewEntry(event) {
   if (data.entries.length === 0) {
     $noEntries.classList.toggle('hidden');
@@ -100,4 +103,15 @@ function handleNewEntry(event) {
   $entryForm.classList.remove('hidden');
   $newEntry.classList.remove('hidden');
   $entries.classList.remove('hidden');
+  data.view = 'entry-form';
 }
+
+window.addEventListener('DOMContentLoaded', function () {
+  if (data.view === 'entries') {
+    $entryForm.classList.toggle('hidden');
+    $entriesView.classList.remove('hidden');
+    $newEntry.classList.toggle('hidden');
+    $entriesNewButton.classList.remove('hidden');
+    $entries.classList.toggle('hidden');
+  }
+});
