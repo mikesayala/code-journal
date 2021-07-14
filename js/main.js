@@ -40,6 +40,7 @@ function handleSubmitForm(event) {
   $newEntry.classList.toggle('hidden');
   $entriesNewButton.classList.remove('hidden');
   $entries.classList.toggle('hidden');
+  data.view = 'entries';
 }
 
 function objectDOMTree(formObject) {
