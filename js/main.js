@@ -78,8 +78,12 @@ function objectDOMTree(formObject) {
   $notesP.textContent = formObject.notes;
   $columnHalf.appendChild($notesP);
 
+  var $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', formObject.entryId);
+  $li.appendChild($widthRow);
+
   $widthRow.appendChild($columnHalf);
-  $ul.appendChild($widthRow);
+  $ul.appendChild($li);
 
   return $ul;
 }
