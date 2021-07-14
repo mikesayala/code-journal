@@ -2,15 +2,16 @@
 /* exported data */
 var $img = document.querySelector('img');
 var $photoUrl = document.querySelector('.photo-url');
-var $entryForm = document.querySelector('.entry-form');
+var $entryForm = document.querySelector('.form');
 var $entriesView = document.querySelector('.entries');
 var $entries = document.querySelector('.nav-entries');
-var $entriesNewButton = document.querySelector('.entries-new');
 var $newButton = document.querySelector('.new-button');
-
+var $view = document.querySelectorAll('.view');
+var $noEntries = document.querySelector('.noEntries');
+var $newEntriesObject = document.querySelector('.new-entries-object');
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
-$entryForm.addEventListener('submit', handleSubmitForm);
+
 window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
 $entries.addEventListener('click', handleEntries);
 
@@ -24,24 +25,23 @@ function inputURL(event) {
 function handleSubmitForm(event) {
   event.preventDefault();
   var formObject = {
-    title: $entryForm.elements.title.value,
-    url: $entryForm.elements.url.value,
-    notes: $entryForm.elements.notes.value,
+    title: $entryForm.title.value,
+    url: $entryForm.url.value,
+    notes: $entryForm.notes.value,
     entryId: data.nextEntryId
   };
   data.nextEntryId++;
   data.entries.unshift(formObject);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
-
-  $entriesView.prepend(objectDOMTree(formObject));
-  $entryForm.classList.toggle('hidden');
-  $entriesView.classList.remove('hidden');
-  $newEntry.classList.toggle('hidden');
-  $entriesNewButton.classList.remove('hidden');
-  $entries.classList.toggle('hidden');
   data.view = 'entries';
+  for (var i = 0; i < $view.length; i++) {
+    setDataView($view[i]);
+  }
+  $newEntriesObject.prepend(objectDOMTree(formObject));
 }
+
+$entryForm.addEventListener('submit', handleSubmitForm);
 
 function objectDOMTree(formObject) {
   var $ul = document.createElement('ul');
@@ -85,41 +85,39 @@ function DOMObjectLoaded(event) {
   }
 }
 
-var $newEntry = document.querySelector('.new-entry');
-var $noEntries = document.querySelector('.noEntries');
-
 function handleEntries(event) {
+  data.view = 'entries';
   if (data.entries.length === 0) {
     $noEntries.classList.remove('hidden');
   }
-  $entryForm.classList.toggle('hidden');
-  $entriesView.classList.remove('hidden');
-  $newEntry.classList.toggle('hidden');
-  $entriesNewButton.classList.remove('hidden');
-  $entries.classList.toggle('hidden');
-  data.view = 'entries';
+  for (var i = 0; i < $view.length; i++) {
+    setDataView($view[i]);
+  }
+}
+
+function setDataView(object) {
+  var setView = object.getAttribute('data-view');
+  if (setView !== data.view) {
+    object.classList.add('hidden');
+  } else {
+    object.classList.remove('hidden');
+  }
 }
 
 function handleNewEntry(event) {
+  data.view = 'entry-form';
   if (data.entries.length === 0) {
     $noEntries.classList.toggle('hidden');
   }
-  $entriesNewButton.classList.toggle('hidden');
-  $entriesView.classList.toggle('hidden');
-  $entryForm.classList.remove('hidden');
-  $newEntry.classList.remove('hidden');
-  $entries.classList.remove('hidden');
-  data.view = 'entry-form';
+  for (var i = 0; i < $view.length; i++) {
+    setDataView($view[i]);
+  }
 }
 
 window.addEventListener('DOMContentLoaded', sameOnLoad);
 
 function sameOnLoad(event) {
-  if (data.view === 'entries') {
-    $entryForm.classList.toggle('hidden');
-    $entriesView.classList.remove('hidden');
-    $newEntry.classList.toggle('hidden');
-    $entriesNewButton.classList.remove('hidden');
-    $entries.classList.toggle('hidden');
+  for (var i = 0; i < $view.length; i++) {
+    setDataView($view[i]);
   }
 }

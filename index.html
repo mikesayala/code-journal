@@ -28,15 +28,11 @@
   </header>
   <main>
     <div class="container main-container">
-      <div class="row">
-        <h2 class="new-entry">New Entry</h2>
-      </div>
-      <div class="row info justify-between entries-new hidden">
-        <h2>Entries</h2>
-        <input type="submit" value="NEW" class="save new-button">
-      </div>
-      <div data-view="entry-form">
-          <form action="index.html" class="entry-form">
+      <div data-view="entry-form" class="entry-form view">
+          <div class="row">
+            <h2 class="new-entry">New Entry</h2>
+          </div>
+          <form action="index.html" class="form">
            <div class="row width-row">
               <div class="row image-row">
                 <img src="images/placeholder-image-square.jpg" alt="empty" class="imageholder">
@@ -65,10 +61,15 @@
             </div>
           </form>
         </div>
-        <div data-view="entries" class="entries hidden">
-        </div>
-        <div class="row noEntries justify-center hidden">
-          <h4>No entries have been recorded.</h4>
+        <div data-view="entries" class="entries view hidden">
+          <div class="row info justify-between entries-new">
+            <h2>Entries</h2>
+            <input type="submit" value="NEW" class="save new-button">
+          </div>
+          <div class="row noEntries justify-center hidden">
+            <h4>No entries have been recorded.</h4>
+          </div>
+          <div class="new-entries-object"></div>
         </div>
     </div>
   </main>
