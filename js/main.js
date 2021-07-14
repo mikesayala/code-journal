@@ -35,6 +35,11 @@ function handleSubmitForm(event) {
   $entryForm.reset();
 
   $entriesView.prepend(objectDOMTree(formObject));
+  $entryForm.classList.toggle('hidden');
+  $entriesView.classList.remove('hidden');
+  $newEntry.classList.toggle('hidden');
+  $entriesNewButton.classList.remove('hidden');
+  $entries.classList.toggle('hidden');
 }
 
 function objectDOMTree(formObject) {
