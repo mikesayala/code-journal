@@ -60,10 +60,18 @@ function objectDOMTree(formObject) {
   var $columnHalf = document.createElement('div');
   $columnHalf.setAttribute('class', 'column column-half');
 
+  var $pencilRow = document.createElement('div');
+  $pencilRow.setAttribute('class', 'row justify-between');
+  $columnHalf.appendChild($pencilRow);
+
   var $h3 = document.createElement('h3');
   $h3.setAttribute('class', 'label margin-left-20');
   $h3.textContent = formObject.title;
-  $columnHalf.appendChild($h3);
+  $pencilRow.appendChild($h3);
+
+  var $pencilIcon = document.createElement('i');
+  $pencilIcon.setAttribute('class', 'fas fa-pencil-alt');
+  $pencilRow.appendChild($pencilIcon);
 
   var $notesP = document.createElement('p');
   $notesP.setAttribute('class', 'info photo-url padding-left-20');
