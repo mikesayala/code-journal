@@ -11,7 +11,6 @@ var $noEntries = document.querySelector('.noEntries');
 var $newEntriesObject = document.querySelector('.new-entries-object');
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
-
 window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
 $entries.addEventListener('click', handleEntries);
 
@@ -127,3 +126,15 @@ window.addEventListener('DOMContentLoaded', sameOnLoad);
 function sameOnLoad(event) {
   setDataView($view);
 }
+
+// $entriesView.addEventListener('click', function () {
+//   console.log('hi');
+// });
+$entriesView.addEventListener('click', function () {
+  for (var i = 0; i < $view.length; i++) {
+    if (event.target && event.target.matches('.fa-pencil-alt')) {
+      data.view = 'entry-form';
+      setDataView($view);
+    }
+  }
+});
