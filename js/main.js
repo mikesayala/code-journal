@@ -79,6 +79,7 @@ function objectDOMTree(formObject) {
 
   var $li = document.createElement('li');
   $li.setAttribute('data-entry-id', formObject.entryId);
+  $li.setAttribute('class', 'data-id');
   $li.appendChild($widthRow);
 
   $widthRow.appendChild($columnHalf);
@@ -127,14 +128,21 @@ function sameOnLoad(event) {
   setDataView($view);
 }
 
+// function newToEdit(entry) {
+
+// }
+
 // $entriesView.addEventListener('click', function () {
 //   console.log('hi');
 // });
-$entriesView.addEventListener('click', function () {
-  for (var i = 0; i < $view.length; i++) {
-    if (event.target && event.target.matches('.fa-pencil-alt')) {
-      data.view = 'entry-form';
-      setDataView($view);
-    }
+$entriesView.addEventListener('click', matchingEntry);
+
+function matchingEntry(event) {
+  if (event.target.matches('.fa-pencil-alt')) {
+    var dataId = event.target.closest('li.data-id');
+    data.view = 'entry-form';
+    setDataView($view);
+    data.editing = dataId;
+
   }
-});
+}
