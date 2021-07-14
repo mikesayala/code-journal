@@ -35,9 +35,7 @@ function handleSubmitForm(event) {
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
   data.view = 'entries';
-  for (var i = 0; i < $view.length; i++) {
-    setDataView($view[i]);
-  }
+  setDataView($view);
   $newEntriesObject.prepend(objectDOMTree(formObject));
 }
 
@@ -90,17 +88,17 @@ function handleEntries(event) {
   if (data.entries.length === 0) {
     $noEntries.classList.remove('hidden');
   }
-  for (var i = 0; i < $view.length; i++) {
-    setDataView($view[i]);
-  }
+  setDataView($view);
 }
 
-function setDataView(object) {
-  var setView = object.getAttribute('data-view');
-  if (setView !== data.view) {
-    object.classList.add('hidden');
-  } else {
-    object.classList.remove('hidden');
+function setDataView($view) {
+  for (var i = 0; i < $view.length; i++) {
+    var setView = $view[i].getAttribute('data-view');
+    if (setView !== data.view) {
+      $view[i].classList.add('hidden');
+    } else {
+      $view[i].classList.remove('hidden');
+    }
   }
 }
 
@@ -109,15 +107,11 @@ function handleNewEntry(event) {
   if (data.entries.length === 0) {
     $noEntries.classList.toggle('hidden');
   }
-  for (var i = 0; i < $view.length; i++) {
-    setDataView($view[i]);
-  }
+  setDataView($view);
 }
 
 window.addEventListener('DOMContentLoaded', sameOnLoad);
 
 function sameOnLoad(event) {
-  for (var i = 0; i < $view.length; i++) {
-    setDataView($view[i]);
-  }
+  setDataView($view);
 }
