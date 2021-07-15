@@ -140,9 +140,7 @@ function handleNewEntry(event) {
   setDataView($view);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
-  if (event.target.matches('.new-button')) {
-    $delete.classList.add('hidden');
-  }
+  $delete.classList.add('hidden');
 }
 
 window.addEventListener('DOMContentLoaded', sameOnLoad);
@@ -174,21 +172,11 @@ function matchingEntry(event) {
     setDataView($view);
     var number = dataId.getAttribute('data-entry-id');
     var dataEntryNumber = parseInt(number);
+    $delete.classList.remove('hidden');
   }
   newToEdit();
   editObject(dataEntryNumber);
-  $delete.classList.remove('hidden');
 }
-
-// function addRemoveDelete($test) {
-//   if (event.target.matches('.fa-pencil-alt')) {
-//     $test.classList.remove('justify-end');
-//     $test.classList.add('justify-between');
-//   } else if (event.target.matches('.new-button')) {
-//     $test.classList.add('justify-end');
-//     $test.classList.remove('justify-between');
-//   }
-// }
 
 function editObject(dataEntryNumber) {
   for (var i = 0; i < data.entries.length; i++) {
