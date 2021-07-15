@@ -142,7 +142,14 @@ function matchingEntry(event) {
     var dataId = event.target.closest('li.data-id');
     data.view = 'entry-form';
     setDataView($view);
-    data.editing = dataId;
+    var number = dataId.getAttribute('data-entry-id');
+    var dataEntryNumber = parseInt(number);
+  }
 
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === dataEntryNumber) {
+      data.editing = data.entries[i];
+
+    }
   }
 }
