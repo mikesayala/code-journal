@@ -13,7 +13,7 @@ var $newEntryH2 = document.querySelector('.new-entry');
 var $editEntryh2 = document.querySelector('.edit-entry');
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
-window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
+window.addEventListener('DOMContentLoaded', generateEntryList);
 $entries.addEventListener('click', handleEntries);
 
 function inputURL(event) {
@@ -47,7 +47,7 @@ function handleSubmitForm(event) {
     data.entries.unshift(formObject);
   }
   $newEntriesObject.innerHTML = '';
-  DOMObjectLoaded();
+  generateEntryList();
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
   data.view = 'entries';
@@ -104,7 +104,7 @@ function objectDOMTree(formObject) {
   return $ul;
 }
 
-function DOMObjectLoaded(event) {
+function generateEntryList(event) {
   for (var i = 0; i < data.entries.length; i++) {
     $newEntriesObject.appendChild(objectDOMTree(data.entries[i]));
   }
