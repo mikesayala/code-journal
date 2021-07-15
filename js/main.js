@@ -194,3 +194,16 @@ if ($delete.className.includes('hidden')) {
   $test.classList.remove('justify-between');
   $test.classList.add('justify-end');
 }
+
+var $deleteEntry = document.querySelector('.delete-entry');
+
+$delete.addEventListener('click', handleDelete);
+var $cancel = document.querySelector('.cancel');
+$cancel.addEventListener('click', handleCancel);
+function handleCancel(event) {
+  $deleteEntry.classList.toggle('hidden');
+}
+
+function handleDelete(event) {
+  $deleteEntry.classList.toggle('hidden');
+}
