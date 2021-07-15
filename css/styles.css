@@ -58,6 +58,10 @@ li {
   justify-content: flex-end;
 }
 
+.width-50 {
+  width: 50%;
+}
+
 .save {
   margin: 10px 0;
   font-size: 15px;
@@ -110,4 +114,8 @@ li {
 .no-entries {
   font-family: 'Proza Libre', sans-serif;
   font-weight: 300;
+}
+
+.align-center {
+  align-items: center;
 }

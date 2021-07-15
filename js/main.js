@@ -11,6 +11,7 @@ var $noEntries = document.querySelector('.noEntries');
 var $newEntriesObject = document.querySelector('.new-entries-object');
 var $newEntryH2 = document.querySelector('.new-entry');
 var $editEntryh2 = document.querySelector('.edit-entry');
+var $delete = document.querySelector('.delete');
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
 window.addEventListener('DOMContentLoaded', generateEntryList);
@@ -116,6 +117,7 @@ function handleEntries(event) {
     $noEntries.classList.remove('hidden');
   }
   setDataView($view);
+  $delete.classList.add('hidden');
 }
 
 function setDataView($view) {
@@ -138,6 +140,9 @@ function handleNewEntry(event) {
   setDataView($view);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
+  if (event.target.matches('.new-button')) {
+    $delete.classList.add('hidden');
+  }
 }
 
 window.addEventListener('DOMContentLoaded', sameOnLoad);
@@ -172,7 +177,18 @@ function matchingEntry(event) {
   }
   newToEdit();
   editObject(dataEntryNumber);
+  $delete.classList.remove('hidden');
 }
+
+// function addRemoveDelete($test) {
+//   if (event.target.matches('.fa-pencil-alt')) {
+//     $test.classList.remove('justify-end');
+//     $test.classList.add('justify-between');
+//   } else if (event.target.matches('.new-button')) {
+//     $test.classList.add('justify-end');
+//     $test.classList.remove('justify-between');
+//   }
+// }
 
 function editObject(dataEntryNumber) {
   for (var i = 0; i < data.entries.length; i++) {
@@ -184,4 +200,9 @@ function editObject(dataEntryNumber) {
       $notesEdit.value = data.editing.notes;
     }
   }
+}
+var $test = document.querySelector('.test');
+if ($delete.className.includes('hidden')) {
+  $test.classList.remove('justify-between');
+  $test.classList.add('justify-end');
 }
