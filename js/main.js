@@ -9,6 +9,8 @@ var $newButton = document.querySelector('.new-button');
 var $view = document.querySelectorAll('.view');
 var $noEntries = document.querySelector('.noEntries');
 var $newEntriesObject = document.querySelector('.new-entries-object');
+var $newEntryH2 = document.querySelector('.new-entry');
+var $editEntryh2 = document.querySelector('.edit-entry');
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
 window.addEventListener('DOMContentLoaded', DOMObjectLoaded);
@@ -29,13 +31,27 @@ function handleSubmitForm(event) {
     notes: $entryForm.notes.value,
     entryId: data.nextEntryId
   };
-  data.nextEntryId++;
-  data.entries.unshift(formObject);
+  if (data.editing !== null) {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = {
+          title: $entryForm.title.value,
+          url: $entryForm.url.value,
+          notes: $entryForm.notes.value,
+          entryId: data.editing.entryId
+        };
+      }
+    }
+  } else {
+    data.nextEntryId++;
+    data.entries.unshift(formObject);
+  }
+  $newEntriesObject.innerHTML = '';
+  DOMObjectLoaded();
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
   data.view = 'entries';
   setDataView($view);
-  $newEntriesObject.prepend(objectDOMTree(formObject));
 }
 
 $entryForm.addEventListener('submit', handleSubmitForm);
@@ -90,8 +106,7 @@ function objectDOMTree(formObject) {
 
 function DOMObjectLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    $entriesView.appendChild(objectDOMTree(data.entries[i]));
-
+    $newEntriesObject.appendChild(objectDOMTree(data.entries[i]));
   }
 }
 
@@ -116,10 +131,13 @@ function setDataView($view) {
 
 function handleNewEntry(event) {
   data.view = 'entry-form';
+  data.editing = null;
   if (data.entries.length === 0) {
     $noEntries.classList.toggle('hidden');
   }
   setDataView($view);
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $entryForm.reset();
 }
 
 window.addEventListener('DOMContentLoaded', sameOnLoad);
@@ -128,18 +146,22 @@ function sameOnLoad(event) {
   setDataView($view);
 }
 
-// function newToEdit(entry) {
+function newToEdit(entry) {
+  if (event.target.matches('.fa-pencil-alt')) {
+    $newEntryH2.classList.add('hidden');
+    $editEntryh2.classList.remove('hidden');
+  } else if (event.target.matches('.new-button')) {
+    $newEntryH2.classList.remove('hidden');
+    $editEntryh2.classList.add('hidden');
+  }
+}
 
-// }
-
-// $entriesView.addEventListener('click', function () {
-//   console.log('hi');
-// });
 $entriesView.addEventListener('click', matchingEntry);
 
 var $notesEdit = document.querySelector('.textarea');
 var $titleEdit = document.querySelector('.title');
 var $imgEdit = document.querySelector('.imageholder');
+
 function matchingEntry(event) {
   if (event.target.matches('.fa-pencil-alt')) {
     var dataId = event.target.closest('li.data-id');
@@ -148,7 +170,11 @@ function matchingEntry(event) {
     var number = dataId.getAttribute('data-entry-id');
     var dataEntryNumber = parseInt(number);
   }
+  newToEdit();
+  editObject(dataEntryNumber);
+}
 
+function editObject(dataEntryNumber) {
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === dataEntryNumber) {
       data.editing = data.entries[i];
