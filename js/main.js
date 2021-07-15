@@ -137,6 +137,9 @@ function sameOnLoad(event) {
 // });
 $entriesView.addEventListener('click', matchingEntry);
 
+var $notesEdit = document.querySelector('.textarea');
+var $titleEdit = document.querySelector('.title');
+var $imgEdit = document.querySelector('.imageholder');
 function matchingEntry(event) {
   if (event.target.matches('.fa-pencil-alt')) {
     var dataId = event.target.closest('li.data-id');
@@ -149,7 +152,10 @@ function matchingEntry(event) {
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === dataEntryNumber) {
       data.editing = data.entries[i];
-
+      $imgEdit.setAttribute('src', data.editing.url);
+      $titleEdit.value = data.editing.title;
+      $photoUrl.value = data.editing.url;
+      $notesEdit.value = data.editing.notes;
     }
   }
 }
