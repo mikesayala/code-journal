@@ -11,10 +11,18 @@ var $noEntries = document.querySelector('.noEntries');
 var $newEntriesObject = document.querySelector('.new-entries-object');
 var $newEntryH2 = document.querySelector('.new-entry');
 var $editEntryh2 = document.querySelector('.edit-entry');
+var $delete = document.querySelector('.delete');
+var $cancel = document.querySelector('.cancel');
+var $deleteEntry = document.querySelector('.delete-entry');
+var $confirm = document.querySelector('.confirm');
+
+$confirm.addEventListener('click', confirmDelete);
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
 window.addEventListener('DOMContentLoaded', generateEntryList);
 $entries.addEventListener('click', handleEntries);
+$delete.addEventListener('click', handleDelete);
+$cancel.addEventListener('click', handleCancel);
 
 function inputURL(event) {
   if (event.target.value === '') {
@@ -116,6 +124,7 @@ function handleEntries(event) {
     $noEntries.classList.remove('hidden');
   }
   setDataView($view);
+  $delete.classList.add('hidden');
 }
 
 function setDataView($view) {
@@ -138,12 +147,16 @@ function handleNewEntry(event) {
   setDataView($view);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
+  $delete.classList.add('hidden');
 }
 
 window.addEventListener('DOMContentLoaded', sameOnLoad);
 
 function sameOnLoad(event) {
   setDataView($view);
+  if (data.editing === null) {
+    $noEntries.classList.toggle('hidden');
+  }
 }
 
 function newToEdit(entry) {
@@ -169,6 +182,7 @@ function matchingEntry(event) {
     setDataView($view);
     var number = dataId.getAttribute('data-entry-id');
     var dataEntryNumber = parseInt(number);
+    $delete.classList.remove('hidden');
   }
   newToEdit();
   editObject(dataEntryNumber);
@@ -184,4 +198,36 @@ function editObject(dataEntryNumber) {
       $notesEdit.value = data.editing.notes;
     }
   }
+}
+var $test = document.querySelector('.test');
+if ($delete.className.includes('hidden')) {
+  $test.classList.remove('justify-between');
+  $test.classList.add('justify-end');
+}
+
+function handleCancel(event) {
+  $deleteEntry.classList.toggle('hidden');
+}
+
+function handleDelete(event) {
+  $deleteEntry.classList.toggle('hidden');
+}
+
+function confirmDelete(event) {
+  var $list = document.querySelectorAll('.data-id');
+  if ($list.length === 0) {
+    return;
+  }
+  var dataId = data.editing.entryId;
+  for (var i = 0; i < data.entries.length; i++) {
+    if (dataId === data.entries[i].entryId) {
+      data.entries.splice(data.entries[i], 1);
+    }
+  }
+  $newEntriesObject.innerHTML = '';
+  generateEntryList();
+  $deleteEntry.classList.toggle('hidden');
+  data.view = 'entries';
+  setDataView($view);
+  $noEntries.classList.remove('hidden');
 }

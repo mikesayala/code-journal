@@ -18,6 +18,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="delete-entry hidden">
+    <div class="modal-background"></div>
+    <div class="modal-container">
+      <div class="row justify-center">
+        <div class="modal">
+          <p class="modal-text">Are you sure you want to delete this entry?</p>
+          <div class="row justify-between">
+            <input type="submit" value="cancel" class=" cancel left-10">
+            <input type="submit" value="confirm" class=" confirm right-10">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <header class="header">
     <div class="container header-container">
       <div class="row">
@@ -57,8 +71,15 @@
            </div>
             <label for="notes"><h3 class="note-label">Notes</h3></label>
             <textarea name="notes" id="notes" cols="30" rows="10" class="textarea" required="required"></textarea>
-            <div class="row justify-end">
-              <input type="submit" value="SAVE" class="save">
+            <div class="row justify-between test align-center">
+              <div class="column width-50 delete hidden">
+                <a href="#">Delete Entry</a>
+              </div>
+              <div class="column width-50">
+                <div class="row justify-end">
+                  <input type="submit" value="SAVE" class="save">
+                </div>
+              </div>
             </div>
           </form>
         </div>
