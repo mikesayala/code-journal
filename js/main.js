@@ -154,6 +154,9 @@ window.addEventListener('DOMContentLoaded', sameOnLoad);
 
 function sameOnLoad(event) {
   setDataView($view);
+  if (data.editing === null) {
+    $noEntries.classList.toggle('hidden');
+  }
 }
 
 function newToEdit(entry) {
