@@ -12,10 +12,17 @@ var $newEntriesObject = document.querySelector('.new-entries-object');
 var $newEntryH2 = document.querySelector('.new-entry');
 var $editEntryh2 = document.querySelector('.edit-entry');
 var $delete = document.querySelector('.delete');
+var $cancel = document.querySelector('.cancel');
+var $deleteEntry = document.querySelector('.delete-entry');
+var $confirm = document.querySelector('.confirm');
+
+$confirm.addEventListener('click', confirmDelete);
 $newButton.addEventListener('click', handleNewEntry);
 $photoUrl.addEventListener('input', inputURL);
 window.addEventListener('DOMContentLoaded', generateEntryList);
 $entries.addEventListener('click', handleEntries);
+$delete.addEventListener('click', handleDelete);
+$cancel.addEventListener('click', handleCancel);
 
 function inputURL(event) {
   if (event.target.value === '') {
@@ -195,15 +202,29 @@ if ($delete.className.includes('hidden')) {
   $test.classList.add('justify-end');
 }
 
-var $deleteEntry = document.querySelector('.delete-entry');
-
-$delete.addEventListener('click', handleDelete);
-var $cancel = document.querySelector('.cancel');
-$cancel.addEventListener('click', handleCancel);
 function handleCancel(event) {
   $deleteEntry.classList.toggle('hidden');
 }
 
 function handleDelete(event) {
   $deleteEntry.classList.toggle('hidden');
+}
+
+function confirmDelete(event) {
+  var $list = document.querySelectorAll('.data-id');
+  if ($list.length === 0) {
+    return;
+  }
+  var dataId = data.editing.entryId;
+  for (var i = 0; i < data.entries.length; i++) {
+    if (dataId === data.entries[i].entryId) {
+      data.entries.splice(data.entries[i], 1);
+    }
+  }
+  $newEntriesObject.innerHTML = '';
+  generateEntryList();
+  $deleteEntry.classList.toggle('hidden');
+  data.view = 'entries';
+  setDataView($view);
+  $noEntries.classList.remove('hidden');
 }
